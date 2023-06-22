@@ -50,6 +50,10 @@ La entrega del trabajo debe realizarse el 27 de junio, fecha en la que también 
 
 > WebJars Locator
 
+> Lombok
+
+> Spring Configuration Processor
+
 ### Integrantes
 > Lizandro Britto
 
