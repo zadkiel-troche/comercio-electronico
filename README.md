@@ -22,7 +22,7 @@ La entrega del trabajo debe realizarse el 27 de junio, fecha en la que también 
 6. Presentación de un informe detallado que incluya una descripción de las contribuciones de cada miembro del grupo.
 
 ## Indicaciones para la abse de datos
-> Nombre: comercios
+> Nombre de la BD: comercios
 
 > Importar el archivo que se encuentra en la carpeta **db** y ejecutarlo para crear las tablas
 
