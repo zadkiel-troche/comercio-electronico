@@ -15,8 +15,13 @@
 
 ### Integrantes
 > Lizandro Britto
+
 > Jeremias Ojeda
+
 > Jonhatan Lopez
+
 > Zadkiel Troche
+
 > Rodrigo Bogado
+
 > Nicolas Hein
