@@ -5,12 +5,19 @@
 
 ## Dependencias
 > Spring Boot DevTools
+
 > Spring Web
+
 > Thymeleaf
+
 > Spring Data JPA
+
 > MariaDB Driver
+
 > Bootstrap
+
 > FontAwesome
+
 > WebJars Locator
 
 ### Integrantes
