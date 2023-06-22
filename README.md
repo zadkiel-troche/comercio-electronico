@@ -24,6 +24,8 @@ La entrega del trabajo debe realizarse el 27 de junio, fecha en la que también 
 ## Versiones de Compatibilidad
 > Version de Java: 17
 
+> Apache NetBeans IDE 17
+
 ## Dependencias
 > Spring Boot DevTools
 
