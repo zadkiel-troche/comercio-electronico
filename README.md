@@ -27,6 +27,8 @@ La entrega del trabajo debe realizarse el 27 de junio, fecha en la que también 
 ## Dependencias
 > Spring Boot DevTools
 
+> Spring Security
+
 > Spring Web
 
 > Thymeleaf
