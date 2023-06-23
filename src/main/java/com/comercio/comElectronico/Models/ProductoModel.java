@@ -23,7 +23,7 @@ public class ProductoModel {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_producto;
     
     private String nombre;
     private String descripcion;

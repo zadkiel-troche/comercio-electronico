@@ -20,7 +20,7 @@ import lombok.Setter;
 public class MarcasModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_marca;
     
     private String nombre;
 }

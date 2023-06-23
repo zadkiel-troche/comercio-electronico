@@ -19,7 +19,7 @@ import lombok.Setter;
 public class EmpresaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_empresa;
     
     private String nombre;
     private String direccion;

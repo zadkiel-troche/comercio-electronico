@@ -6,10 +6,6 @@ package com.comercio.comElectronico.Repositories;
 import com.comercio.comElectronico.Models.EmpresaModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author EVOO
- */
 public interface EmpresaRepositorie extends JpaRepository<EmpresaModel, Long>{
     
 }
