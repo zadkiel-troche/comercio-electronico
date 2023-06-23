@@ -19,27 +19,27 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserModel {
     
-    public UserModel(String nombre, String email, String pass, int id_empresa, List<Authority> autorities){
+    public UserModel(String nombre, String email, String pass, int id_empresa /*, List<Authority> autorities*/){
         this.nombre = nombre;
         this.email = email;
         this.pass = pass;
         this.id_empresa = id_empresa;
-        this.authorities = authorities;
+        //this.authorities = authorities;
     }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_usuario;
     
     private String nombre;
     private String email;
     private String pass;
     private int id_empresa;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    /*@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuarios_roles", 
-            joinColumns = @JoinColumn(name = "usuarios", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "roles", referencedColumnName = "id")
             )
-    private List<Authority> authorities;
+    private List<Authority> authorities;*/
 }
