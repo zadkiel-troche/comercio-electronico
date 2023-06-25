@@ -1,87 +1,157 @@
 <!DOCTYPE html>
 <html xmlns="http:://www.thymeleaf.org">
     <head th:replace="comunes/template :: head" >
-        
+
     </head>
     <body>
-        <h1>Tienda Elamigos</h1>
-        <div class="col-4">
-            <ul class="product-list">
+        <header th:replace="comunes/template :: header"></header>
 
-                <div class="card" style="width: 18rem;">
-                    <img src="https://www.dummyimage.com/500x500/000/fff&text=celular" alt="todos somos putos">
-                    <div class="card-body">
-                        <h5 class="card-title">Samsung S23-Ultra</h5>
-                        <p class="card-text">Breve descripcion del producto</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Pantalla</li>
-                        <li class="list-group-item">ram</li>
-                        <li class="list-group-item">procesador</li>
-                        <li class="list-group-item">camara</li>
-                    </ul>
-                    <div class="card-body">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            Editar
-                        </button>
+        <div class="container">
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Producto</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="mb-4 mt-4">
+                <h4>Mis Productos</h4>
+            </div>
+            <div class="mb-4">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
+                    Nuevo Producto
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Producto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre</label>
+                                        <input id="nombre" type="text" class="form-control" placeholder="Ingrese el nombre del producto" required>
                                     </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Nombre</label>
-                                                <input type="text" class="form-control" placeholder="Ingrese el nombre del producto">
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <label for="exampleFormControlTextarea1">Descripciòn</label>
-                                                <textarea class="form-control" rows="3" placeholder="Ingrese descripción del producto"></textarea>
-                                            </div>
-                                            <br>
-                                           <div class="form-group">
-                                                <label for="exampleInputEmail1">Pantalla</label>
-                                                <input type="text" class="form-control" placeholder="Ingrese la resolución de pantalla">
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Ram</label>
-                                                <input type="text" class="form-control" placeholder="Ingrese cantidad de Gb de RAM">
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Procesador</label>
-                                                <input type="text" class="form-control" placeholder="Ingrese procesador">
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Camara</label>
-                                                <input type="text" class="form-control" placeholder="Ingrese MP de cámara">
-                                            </div>
-                                            <br>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripciòn</label>
+                                        <textarea id="descripcion" class="form-control" rows="2" placeholder="Ingrese descripción del producto" required></textarea>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="pantalla">Pantalla</label>
+                                        <input id="pantalla" type="text" class="form-control" placeholder="Ingrese la resolución de pantalla" required>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="ram">Ram</label>
+                                        <input id="ram" type="text" class="form-control" placeholder="Ingrese cantidad de Gb de RAM" required>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="procesador">Procesador</label>
+                                        <input id="procesador" type="text" class="form-control" placeholder="Ingrese procesador" required>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="camara">Camara</label>
+                                        <input id="camara" type="text" class="form-control" placeholder="Ingrese MP de cámara" required>
+                                    </div>
+                                    <br>
 
-                                        </form>
+                                    <div style="display: flex; justify-content: center;">
+                                        <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col col-3 mb-4">
+
+                    <div class="card" style="border-radius: 10px;">
+                        <img src="https://www.dummyimage.com/500x500/000/fff&text=celular" alt="todos somos putos" style="border-top-left-radius: 10px 10px; border-top-right-radius: 10px 10px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Samsung S23-Ultra</h5>
+                            <p class="card-text">Breve descripcion del producto</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Pantalla</li>
+                            <li class="list-group-item">ram</li>
+                            <li class="list-group-item">procesador</li>
+                            <li class="list-group-item">camara</li>
+                        </ul>
+                        <div class="card-body" style="display: flex; justify-content: center;">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary col col-5 m-2" data-bs-toggle="modal" data-bs-target="#modalEditar">
+                                Editar
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalEditar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Producto</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Nombre</label>
+                                                    <input type="text" class="form-control" placeholder="Ingrese el nombre del producto">
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Descripción</label>
+                                                    <textarea class="form-control" rows="3" placeholder="Ingrese descripción del producto"></textarea>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Pantalla</label>
+                                                    <input type="text" class="form-control" placeholder="Ingrese la resolución de pantalla">
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Ram</label>
+                                                    <input type="text" class="form-control" placeholder="Ingrese cantidad de Gb de RAM">
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Procesador</label>
+                                                    <input type="text" class="form-control" placeholder="Ingrese procesador">
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Camara</label>
+                                                    <input type="text" class="form-control" placeholder="Ingrese MP de cámara">
+                                                </div>
+                                                <br>
+
+                                                <div style="display: flex; justify-content: center;">
+                                                    <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <a href="#" class="card-link btn btn-danger col col-5 m-2">Eliminar</a>
                         </div>
-                        <a href="#" class="card-link btn btn-danger">Eliminar</a>
                     </div>
+                    <!-- Agrega más productos aquí -->
                 </div>
-                <!-- Agrega más productos aquí -->
-            </ul>
+            </div>
         </div>
-        
-        
+
+
         <div th:replace="comunes/template :: script"></div>
     </body>
 
