@@ -1,6 +1,6 @@
 package com.comercio.comElectronico.security;
 
-import com.comercio.comElectronico.Models.UserModel;
+import com.comercio.comElectronico.Models.Usuario;
 import java.util.Collection;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 public class SecurityUser implements UserDetails {
     
-    private final UserModel user;
+    private final Usuario user;
     
     @Override
     public String getUsername() {

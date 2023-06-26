@@ -1,13 +1,11 @@
 package com.comercio.comElectronico.Repositories;
 
-import com.comercio.comElectronico.Models.Usuario;
+import com.comercio.comElectronico.Models.Empresa;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<Usuario, Long> {
-
-    Optional<Usuario> findByNombre(String nombre);
-    
+public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
+    Optional<Empresa> findByNombre(String nombre);
 }

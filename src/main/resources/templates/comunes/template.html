@@ -16,7 +16,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header th:fragment="header">
             <nav class="navbar navbar-expand-lg bg-light mb-2">
 			<div class="container">
-				<a class="navbar-brand" href="/">MiComercio</a>
+                            <a class="navbar-brand" href="/" style="background-color: #2069F1; padding: 10px; border-radius: 100%;"> 
+                                <i class="fa fa-shopping-basket" aria-hidden="true" 
+                                   style="font-size: 30px; color: white;"></i>
+                            </a>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -26,19 +29,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 					
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<h4>Hola Zadkiel</h4>
+                                                    <h5 th:text='Hola + ${nombre}'></h5>
 						</li>
 					</ul>
 
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown">
+                                                    
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="https://cdn-icons-png.flaticon.com/512/666/666201.png" alt="user" width="30px" height="30px">
+								<i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px;"></i>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+								<li>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        <i class="fa fa-user" aria-hidden="true" style="font-size: 12px;"></i> Mi Perfil
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="#">
+                                                                        <i class="fa fa-briefcase" aria-hidden="true" style="font-size: 12px;"></i> Mi Empresa
+
+                                                                    </a>
+                                                                </li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+								<li>
+                                                                    <a class="dropdown-item" href="/logout">
+                                                                        <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 12px;"></i> Cerrar Sesion
+
+                                                                    </a>
+                                                                </li>
 							</ul>
 						</li>
 					</ul>

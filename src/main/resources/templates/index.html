@@ -12,13 +12,13 @@
                 <h4>Mis Productos</h4>
             </div>
             <div class="mb-4">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
+                <!-- Button Nuevo Producto -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProducto">
                     Nuevo Producto
                 </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="modalNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <!-- Nuevo Producto -->
+                <div class="modal fade" id="modalNuevoProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -26,37 +26,43 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
+                                <form th:action="@{/products/new}" method="post" th:object="${producto}">
+                                    <div class="form-group mb-4">
                                         <label for="nombre">Nombre</label>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ingrese el nombre del producto" required>
+                                        <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="Ingrese el nombre del producto" required>
                                     </div>
-                                    <br>
-                                    <div class="form-group">
-                                        <label for="descripcion">Descripciòn</label>
-                                        <textarea id="descripcion" class="form-control" rows="2" placeholder="Ingrese descripción del producto" required></textarea>
+
+                                    <div class="form-group mb-4">
+                                        <label for="marca">Marca</label>
+                                        <select class="form-select" id="marca" th:field="*{id_marca}" name="id_marca" required>
+                                            <option th:each="marca: ${lista_marcas}" th:value="${marca.id_marca}" th:text="${marca.nombre}"></option>
+                                        </select>
                                     </div>
-                                    <br>
-                                    <div class="form-group">
+
+                                    <div class="form-group mb-4">
+                                        <label for="descripcion">Descripcion</label>
+                                        <textarea id="descripcion" th:field="*{descripcion}" class="form-control" rows="2" name="descripcion" placeholder="Ingrese descripción del producto" required></textarea>
+                                    </div>
+
+                                    <div class="form-group mb-4">
                                         <label for="pantalla">Pantalla</label>
-                                        <input id="pantalla" type="text" class="form-control" placeholder="Ingrese la resolución de pantalla" required>
+                                        <input id="pantalla" type="text" th:field="*{pantalla}" name="pantalla" class="form-control" placeholder="Ingrese la resolución de pantalla" required>
                                     </div>
-                                    <br>
-                                    <div class="form-group">
+
+                                    <div class="form-group mb-4">
                                         <label for="ram">Ram</label>
-                                        <input id="ram" type="text" class="form-control" placeholder="Ingrese cantidad de Gb de RAM" required>
+                                        <input id="ram" type="text" name="ram" th:field="*{ram}" class="form-control" placeholder="Ingrese cantidad de Gb de RAM" required>
                                     </div>
-                                    <br>
-                                    <div class="form-group">
+
+                                    <div class="form-group mb-4">
                                         <label for="procesador">Procesador</label>
-                                        <input id="procesador" type="text" class="form-control" placeholder="Ingrese procesador" required>
+                                        <input id="procesador" type="text" th:field="*{procesador}" name="procesador" class="form-control" placeholder="Ingrese procesador" required>
                                     </div>
-                                    <br>
-                                    <div class="form-group">
+
+                                    <div class="form-group mb-4">
                                         <label for="camara">Camara</label>
-                                        <input id="camara" type="text" class="form-control" placeholder="Ingrese MP de cámara" required>
+                                        <input id="camara" type="text" name="camara" th:field="*{camara}" class="form-control" placeholder="Ingrese MP de cámara" required>
                                     </div>
-                                    <br>
 
                                     <div style="display: flex; justify-content: center;">
                                         <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
@@ -68,86 +74,379 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Button Nueva Marca-->
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalNuevaMarca">
+                    Nueva Marca
+                </button>
+
+                <!-- Nueva Marca -->
+                <div class="modal fade" id="modalNuevaMarca" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nueva Marca</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/brands/new}" method="post" th:object="${marcas}">
+                                    <div class="form-group mb-4">
+                                        <label for="nombre">Nombre</label>
+                                        <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="Ingrese el nombre del producto" required>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: center;">
+                                        <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Nuevo Usuario -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarioNuevo">
+                    Nuevo Usuario
+                </button>
+
+                <!-- Nuevo Usuario -->
+                <div class="modal fade" id="modalUsuarioNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Usuario</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/user/new}" method="post" th:object="${usuario}">
+                                    <div class="form-group mb-4">
+                                        <label for="nombre">Nombre</label>
+                                        <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="ej: Juan Perez" required>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="email">Email</label>
+                                        <input id="email" type="email" th:field="*{email}" name="email" class="form-control" placeholder="ej: juan@gmail.com" required/>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="pass">Contraseña</label>
+                                        <input id="pass" type="password" th:field="*{pass}" name="pass" class="form-control" placeholder="********" required>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="pass2">Repita la Contraseña</label>
+                                        <input id="pass2" type="password" class="form-control" placeholder="********" required>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="empresa">Empresa</label>
+                                        <select class="form-select" id="empresa" th:field="*{id_empresa}" name="id_empresa" required>
+                                            <option th:each="empresa: ${lista_empresas}" th:value="${empresa.id_empresa}" th:text="${empresa.nombre}"></option>
+                                        </select>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: center;">
+                                        <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Nueva Empresa -->
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalEmpresaNuevo">
+                    Nueva Empresa
+                </button>
+
+                <!-- Nueva Empresa -->
+                <div class="modal fade" id="modalEmpresaNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nueva Empresa</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form th:action="@{/bussines/new}" method="post" th:object="${empresa}">
+                                    <div class="form-group mb-4">
+                                        <label for="nombre">Nombre</label>
+                                        <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="ej: Comercial Enc S.R.L." required>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="direccion">Dirección</label>
+                                        <input id="direccion" type="text" th:field="*{direccion}" name="direccion" class="form-control" placeholder="ej: Avda. Irrazabal" required/>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="telef">Teléfono</label>
+                                        <input id="telef" type="text" th:field="*{telefono}" name="telefono" class="form-control" placeholder="ej: 071 123 456" required/>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: center;">
+                                        <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- alertas -->
+                <div th:if="${not param.isEmpty()}" class="mt-4 mb-4">
+
+                    <div th:if="${param.keySet().contains('new-user-created')}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Usuario registrado exitosamente
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <div th:if="${param.keySet().contains('new-bussines-created')}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Empresa registrada exitosamente
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <div th:if="${param.keySet().contains('new-product-created')}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Producto registrado exitosamente
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <div th:if="${param.keySet().contains('new-brand-created')}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Marca registrada exitosamente
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
             <div class="row">
-
-                <div class="col col-3 mb-4">
-
-                    <div class="card" style="border-radius: 10px;">
-                        <img src="https://www.dummyimage.com/500x500/000/fff&text=celular" alt="todos somos putos" style="border-top-left-radius: 10px 10px; border-top-right-radius: 10px 10px;">
-                        <div class="card-body">
-                            <h5 class="card-title">Samsung S23-Ultra</h5>
-                            <p class="card-text">Breve descripcion del producto</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Pantalla</li>
-                            <li class="list-group-item">ram</li>
-                            <li class="list-group-item">procesador</li>
-                            <li class="list-group-item">camara</li>
-                        </ul>
-                        <div class="card-body" style="display: flex; justify-content: center;">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary col col-5 m-2" data-bs-toggle="modal" data-bs-target="#modalEditar">
-                                Editar
+                <!-- Acordeon Productos -->
+                <div class="accordion mb-4" id="accordionProductos">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneProds" aria-expanded="true" aria-controls="collapseOneProds">
+                                Productos
                             </button>
+                        </h2>
+                        <div id="collapseOneProds" class="accordion-collapse collapse" data-bs-parent="#accordionProductos">
+                            <div class="accordion-body row">
+                                <div class="col col-3 mb-4" th:each="producto: ${lista_productos}">
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="modalEditar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Producto</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="card" style="border-radius: 10px;">
+                                        <img src="https://www.dummyimage.com/500x500/000/fff&text=celular" alt="todos somos putos" style="border-top-left-radius: 10px 10px; border-top-right-radius: 10px 10px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                                            <p class="card-text" th:text="${producto.descripcion}"></p>
                                         </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Nombre</label>
-                                                    <input type="text" class="form-control" placeholder="Ingrese el nombre del producto">
-                                                </div>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Descripción</label>
-                                                    <textarea class="form-control" rows="3" placeholder="Ingrese descripción del producto"></textarea>
-                                                </div>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Pantalla</label>
-                                                    <input type="text" class="form-control" placeholder="Ingrese la resolución de pantalla">
-                                                </div>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Ram</label>
-                                                    <input type="text" class="form-control" placeholder="Ingrese cantidad de Gb de RAM">
-                                                </div>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Procesador</label>
-                                                    <input type="text" class="form-control" placeholder="Ingrese procesador">
-                                                </div>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Camara</label>
-                                                    <input type="text" class="form-control" placeholder="Ingrese MP de cámara">
-                                                </div>
-                                                <br>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item" th:text="@{Pantalla:}+${producto.pantalla}"></li>
+                                            <li class="list-group-item" th:text="@{RAM:}+${producto.ram}"></li>
+                                            <li class="list-group-item" th:text="@{Procesador:}+${producto.procesador}"></li>
+                                            <li class="list-group-item" th:text="@{Camara:}+${producto.camara}"></li>
+                                        </ul>
+                                        <div class="card-body" style="display: flex; justify-content: center;">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary col col-5 m-2" data-bs-toggle="modal" data-bs-target="#modalEditarProducto">
+                                                Editar
+                                            </button>
 
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
-                                                </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modalEditarProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Producto</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form th:action="@{/products/new}" method="post" th:object="${producto}">
+                                                                <div class="form-group mb-4">
+                                                                    <label for="nombre">Nombre</label>
+                                                                    <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="Ingrese el nombre del producto" required>
+                                                                </div>
 
-                                            </form>
+                                                                <div class="form-group mb-4">
+                                                                    <label for="marca">Marca</label>
+                                                                    <select class="form-select" id="marca" th:field="*{id_marca}" name="id_marca" required>
+                                                                        <option th:each="marca: ${lista_marcas}" th:value="${marca.id_marca}" th:text="${marca.nombre}"></option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="descripcion">Descripcion</label>
+                                                                    <textarea id="descripcion" th:field="*{descripcion}" class="form-control" rows="2" name="descripcion" placeholder="Ingrese descripción del producto" required></textarea>
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="pantalla">Pantalla</label>
+                                                                    <input id="pantalla" type="text" th:field="*{pantalla}" name="pantalla" class="form-control" placeholder="Ingrese la resolución de pantalla" required>
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="ram">Ram</label>
+                                                                    <input id="ram" type="text" name="ram" th:field="*{ram}" class="form-control" placeholder="Ingrese cantidad de Gb de RAM" required>
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="procesador">Procesador</label>
+                                                                    <input id="procesador" type="text" th:field="*{procesador}" name="procesador" class="form-control" placeholder="Ingrese procesador" required>
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
+                                                                    <label for="camara">Camara</label>
+                                                                    <input id="camara" type="text" name="camara" th:field="*{camara}" class="form-control" placeholder="Ingrese MP de cámara" required>
+                                                                </div>
+
+                                                                <div style="display: flex; justify-content: center;">
+                                                                    <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="card-link btn btn-danger col col-5 m-2">Eliminar</a>
                                         </div>
                                     </div>
+                                    <!-- Agrega más productos aquí -->
                                 </div>
                             </div>
-                            <a href="#" class="card-link btn btn-danger col col-5 m-2">Eliminar</a>
                         </div>
                     </div>
-                    <!-- Agrega más productos aquí -->
+
                 </div>
+                
+                <!-- Acordeon Marcas -->
+                <div class="accordion mb-4" id="accordionMarcas">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneMarcas" aria-expanded="true" aria-controls="collapseOneMarcas">
+                                Marcas
+                            </button>
+                        </h2>
+                        <div id="collapseOneMarcas" class="accordion-collapse collapse" data-bs-parent="#accordionMarcas">
+                            <div class="accordion-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="marca: ${lista_marcas}">
+                                            <th scope="row" th:text="${marca.id_marca}"></th>
+                                            <td th:text="${marca.nombre}"></td>
+                                            <td>
+                                                <div style="justify-content: center;">
+                                                    <button class="btn btn-warning col-4">Editar</button>
+                                                    <a th:href="@{/brands/delete/}+${marca.id_marca}" onclick="confirm('Esta seguro que desea borrar esta marca')" class="btn btn-danger col-4">Eliminar</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Acordeon Usuarios -->
+                <div class="accordion mb-4" id="accordionUsuarios">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneUsuarios" aria-expanded="true" aria-controls="collapseOneUsuarios">
+                                Usuarios
+                            </button>
+                        </h2>
+                        <div id="collapseOneUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionUsuarios">
+                            <div class="accordion-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="usuario: ${lista_usuarios}">
+                                            <th scope="row" th:text="${usuario.id_usuario}"></th>
+                                            <td th:text="${usuario.nombre}"></td>
+                                            <td>
+                                                <div style="justify-content: center;">
+                                                    <button class="btn btn-warning col-4">Editar</button>
+                                                    <a th:href="@{/user/delete/}+${usuario.id_usuario}" onclick="confirm('¿Está seguro que desea eliminar este usuario?')" class="btn btn-danger col-4">Eliminar</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Acordeon Empresas -->
+                <div class="accordion mb-4" id="accordionEmresas">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneEmpresas" aria-expanded="true" aria-controls="collapseOneEmpresas">
+                                Empresas
+                            </button>
+                        </h2>
+                        <div id="collapseOneEmpresas" class="accordion-collapse collapse" data-bs-parent="#accordionEmresas">
+                            <div class="accordion-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="empresa: ${lista_empresas}">
+                                            <th scope="row" th:text="${empresa.id_empresa}"></th>
+                                            <td th:text="${empresa.nombre}"></td>
+                                            <td>
+                                                <div style="justify-content: center;">
+                                                    <button class="btn btn-warning col-4">Editar</button>
+                                                    <a th:href="@{/bussines/delete/}+${empresa.id_empresa}" onclick="confirm('¿Está seguro que desea eliminar este usuario?')" class="btn btn-danger col-4">Eliminar</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
