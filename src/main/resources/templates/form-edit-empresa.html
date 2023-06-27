@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http:://www.thymeleaf.org">
+    <head th:replace="comunes/template :: head" >
+    <body>
+        <div class="container">
+            <h1>Editar Empresa</h1>
+            <form th:action="@{/bussines/new}" method="post" th:object="${empresa}">
+                <input type="hidden" th:field="*{id_empresa}" />
+                <div class="form-group mb-4">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="ej: Comercial Enc S.R.L." required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="direccion">Dirección</label>
+                    <input id="direccion" type="text" th:field="*{direccion}" name="direccion" class="form-control" placeholder="ej: Avda. Irrazabal" required/>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="telef">Teléfono</label>
+                    <input id="telef" type="text" th:field="*{telefono}" name="telefono" class="form-control" placeholder="ej: 071 123 456" required/>
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                     <a href="/" class="btn btn-secondary col-6 m-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div th:replace="comunes/template :: script"></div>
+    </body>
+</html>

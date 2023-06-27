@@ -1,72 +1,69 @@
 <html xmlns="http:://www.thymeleaf.org">
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html>
-    <head th:fragment="head">
-        <title>Comercio Electronico</title>
-        <meta charset="UTF-8">
+<head th:fragment="head">
+    <title>Comercio Electronico</title>
+    <meta charset="UTF-8">
+        <meta lang="es" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}">
-    </head>
-    <body>
-        <div>TODO write content</div>
-        <header th:fragment="header">
-            <nav class="navbar navbar-expand-lg bg-light mb-2">
-			<div class="container">
-                            <a class="navbar-brand" href="/" style="background-color: #2069F1; padding: 10px; border-radius: 100%;"> 
-                                <i class="fa fa-shopping-basket" aria-hidden="true" 
-                                   style="font-size: 30px; color: white;"></i>
-                            </a>
+            <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+                <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}">
+                    </head>
+                    <body>
+                        <div>TODO write content</div>
+                        <header th:fragment="header">
+                            <nav class="navbar navbar-expand-lg bg-light mb-2">
+                                <div class="container">
+                                    <a class="navbar-brand" href="/" style="background-color: #2069F1; padding: 10px; border-radius: 100%;"> 
+                                        <i class="fa fa-shopping-basket" aria-hidden="true" 
+                                           style="font-size: 30px; color: white;"></i>
+                                    </a>
 
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
 
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
-                                                    <h5 th:text='Hola + ${nombre}'></h5>
-						</li>
-					</ul>
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-					<ul class="navbar-nav">
-						<li class="nav-item dropdown">
-                                                    
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px;"></i>
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-                                                                    <a class="dropdown-item" href="#">
-                                                                        <i class="fa fa-user" aria-hidden="true" style="font-size: 12px;"></i> Mi Perfil
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="dropdown-item" href="#">
-                                                                        <i class="fa fa-briefcase" aria-hidden="true" style="font-size: 12px;"></i> Mi Empresa
+                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                            <li class="nav-item">
+                                                <h5 th:text='Hola + ${nombre}'></h5>
+                                            </li>
+                                        </ul>
 
-                                                                    </a>
-                                                                </li>
-								<li><hr class="dropdown-divider"></li>
-								<li>
-                                                                    <a class="dropdown-item" href="/logout">
-                                                                        <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 12px;"></i> Cerrar Sesion
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown">
 
-                                                                    </a>
-                                                                </li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-        </header>
-        
-        <div th:fragment="script"><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script></div>
-    </body>
-</html>
+                                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px;"></i>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">
+                                                            <i class="fa fa-user" aria-hidden="true" style="font-size: 12px;"></i> Mi Perfil
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">
+                                                            <i class="fa fa-briefcase" aria-hidden="true" style="font-size: 12px;"></i> Mi Empresa
+
+                                                        </a>
+                                                    </li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="/logout">
+                                                            <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 12px;"></i> Cerrar Sesion
+
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </header>
+
+                        <div th:fragment="script"><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script></div>
+                    </body>
+                    </html>

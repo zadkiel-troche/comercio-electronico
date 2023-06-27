@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http:://www.thymeleaf.org">
+    <head th:replace="comunes/template :: head" >
+    <body>
+        <div class="container">
+            <h1>Editar Producto</h1>
+            <form th:action="@{/products/new}" method="post" th:object="${producto}">
+
+                <input id="id_producto" type="hidden" th:field="*{id_producto}" name="id_producto" class="form-control" required>
+
+                <div class="form-group mb-4">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="Ingrese el nombre del producto" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="marca">Marca</label>
+                    <select class="form-select" id="marca" th:field="*{id_marca}" name="id_marca" required>
+                        <option th:each="marca: ${lista_marcas}" th:value="${marca.id_marca}" th:text="${marca.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="descripcion">Descripcion</label>
+                    <textarea id="descripcion" th:field="*{descripcion}" class="form-control" rows="2" name="descripcion" placeholder="Ingrese descripción del producto" required></textarea>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="pantalla">Pantalla</label>
+                    <input id="pantalla" type="text" th:field="*{pantalla}" name="pantalla" class="form-control" placeholder="Ingrese la resolución de pantalla" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="ram">Ram</label>
+                    <input id="ram" type="text" name="ram" th:field="*{ram}" class="form-control" placeholder="Ingrese cantidad de Gb de RAM" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="procesador">Procesador</label>
+                    <input id="procesador" type="text" th:field="*{procesador}" name="procesador" class="form-control" placeholder="Ingrese procesador" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="camara">Camara</label>
+                    <input id="camara" type="text" name="camara" th:field="*{camara}" class="form-control" placeholder="Ingrese MP de cámara" required>
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <a href="/" class="btn btn-secondary col-6 m-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div th:replace="comunes/template :: script"></div>
+    </body>
+</html>

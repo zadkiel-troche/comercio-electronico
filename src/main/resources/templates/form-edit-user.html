@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http:://www.thymeleaf.org">
+    <head th:replace="comunes/template :: head" >
+    <body>
+        <div class="container">
+            <h1>Editar Usuario</h1>
+            <form th:action="@{/user/new}" method="post" th:object="${usuario}">
+                <input type="hidden" name="id_usuario" th:field="*{id_usuario}" />
+                <div class="form-group mb-4">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="ej: Juan Perez" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" th:field="*{email}" name="email" class="form-control" placeholder="ej: juan@gmail.com" required/>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="pass">Contraseña</label>
+                    <input id="pass" type="password" th:field="*{pass}" name="pass" class="form-control" placeholder="********" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="pass2">Repita la Contraseña</label>
+                    <input id="pass2" type="password" class="form-control" placeholder="********" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="empresa">Empresa</label>
+                    <select class="form-select" id="empresa" th:field="*{id_empresa}" name="id_empresa" required>
+                        <option th:each="empresa: ${lista_empresas}" th:value="${empresa.id_empresa}" th:text="${empresa.nombre}"></option>
+                    </select>
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <a href="/" class="btn btn-secondary col-6 m-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div th:replace="comunes/template :: script"></div>
+    </body>
+</html>
+

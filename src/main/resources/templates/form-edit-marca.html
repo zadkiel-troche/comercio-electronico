@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http:://www.thymeleaf.org">
+    <head th:replace="comunes/template :: head" >
+    <body>
+        <div class="container">
+            <h1>Editar Marca</h1>
+            <form th:action="@{/brands/new}" method="post" th:object="${marcas}">
+                
+                <input type="hidden" name="id_marca" th:field="*{id_marca}" />
+                
+                <div class="form-group mb-4">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" th:field="*{nombre}" name="nombre" class="form-control" placeholder="Ingrese el nombre del producto" required>
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <a href="/" class="btn btn-secondary col-6 m-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div th:replace="comunes/template :: script"></div>
+    </body>
+</html>
