@@ -26,7 +26,7 @@
 
                                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                             <li class="nav-item">
-                                                <h5 th:text='Hola + ${nombre}'></h5>
+                                                <h5> Hola <span sec:authentication="principal.Username"></span></h5>
                                             </li>
                                         </ul>
 

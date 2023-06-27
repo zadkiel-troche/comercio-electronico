@@ -7,9 +7,10 @@
         <header th:replace="comunes/template :: header"></header>
 
         <div class="container">
-
+            
             <div class="mb-4 mt-4">
                 <h4>Mis Productos</h4>
+                <span sec:authentication="principal.authorities"></span>
             </div>
             <div class="mb-4">
                 <!-- Button Nuevo Producto -->
@@ -237,7 +238,7 @@
 
             </div>
 
-            <div class="row">
+            <div class="row" th:if="${sec:authorities}" >
                 <!-- Acordeon Productos -->
                 <div class="accordion mb-4" id="accordionProductos">
                     <div class="accordion-item">
