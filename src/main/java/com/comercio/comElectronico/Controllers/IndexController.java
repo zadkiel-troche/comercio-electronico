@@ -9,6 +9,8 @@ import com.comercio.comElectronico.Repositories.MarcasRepository;
 import com.comercio.comElectronico.Repositories.ProductoRepository;
 import com.comercio.comElectronico.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,21 @@ public class IndexController {
     
     @GetMapping("/")
     public String index(Usuario usuario, Empresa empresa, Marcas marca, Producto producto, Model modelo){
+        
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null ;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        @SuppressWarnings("null")
+        String userName = userDetails.getUsername();
+        
+        String userEmpresa = userDetails.getUsername();
+        
+        modelo.addAttribute("nombre",userName);
+        
+        var empresaUser = empresa_repo.findById(Long.MIN_VALUE);
+        modelo.addAttribute("empresa",empresaUser);
         
         var lista_empre = empresa_repo.findAll();
         modelo.addAttribute("lista_empresas", lista_empre);

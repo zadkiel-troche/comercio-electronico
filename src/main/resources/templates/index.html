@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http:://www.thymeleaf.org">
+<html xmlns="http:://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:replace="comunes/template :: head" >
 
     </head>
@@ -7,19 +7,18 @@
         <header th:replace="comunes/template :: header"></header>
 
         <div class="container">
-            
+
             <div class="mb-4 mt-4">
-                <h4>Mis Productos</h4>
-                <span sec:authentication="principal.authorities"></span>
+                <h4>Panel de Control <span th:text='${empresa}'></span></h4>
             </div>
             <div class="mb-4">
                 <!-- Button Nuevo Producto -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProducto">
+                <button sec:authorize="hasAuthority('USER')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProducto">
                     Nuevo Producto
                 </button>
 
                 <!-- Nuevo Producto -->
-                <div class="modal fade" id="modalNuevoProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div sec:authorize="hasAuthority('USER')" class="modal fade" id="modalNuevoProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -77,12 +76,12 @@
                 </div>
 
                 <!-- Button Nueva Marca-->
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalNuevaMarca">
+                <button sec:authorize="hasAuthority('USER')" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalNuevaMarca">
                     Nueva Marca
                 </button>
 
                 <!-- Nueva Marca -->
-                <div class="modal fade" id="modalNuevaMarca" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div sec:authorize="hasAuthority('USER')" class="modal fade" id="modalNuevaMarca" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -108,12 +107,12 @@
                 </div>
 
                 <!-- Button Nuevo Usuario -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarioNuevo">
+                <button sec:authorize="hasAuthority('ADMIN')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarioNuevo">
                     Nuevo Usuario
                 </button>
 
                 <!-- Nuevo Usuario -->
-                <div class="modal fade" id="modalUsuarioNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div sec:authorize="hasAuthority('ADMIN')" class="modal fade" id="modalUsuarioNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -138,17 +137,12 @@
                                     </div>
 
                                     <div class="form-group mb-4">
-                                        <label for="pass2">Repita la Contraseña</label>
-                                        <input id="pass2" type="password" class="form-control" placeholder="********" required>
-                                    </div>
-
-                                    <div class="form-group mb-4">
                                         <label for="empresa">Empresa</label>
                                         <select class="form-select" id="empresa" th:field="*{id_empresa}" name="id_empresa" required>
                                             <option th:each="empresa: ${lista_empresas}" th:value="${empresa.id_empresa}" th:text="${empresa.nombre}"></option>
                                         </select>
                                     </div>
-
+                                    
                                     <div style="display: flex; justify-content: center;">
                                         <button type="reset" class="btn btn-secondary col-6 m-2" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary col-6 m-2">Guardar</button>
@@ -161,12 +155,12 @@
                 </div>
 
                 <!-- Button Nueva Empresa -->
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalEmpresaNuevo">
+                <button sec:authorize="hasAuthority('ADMIN')" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalEmpresaNuevo">
                     Nueva Empresa
                 </button>
 
                 <!-- Nueva Empresa -->
-                <div class="modal fade" id="modalEmpresaNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div sec:authorize="hasAuthority('ADMIN')" class="modal fade" id="modalEmpresaNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -238,161 +232,169 @@
 
             </div>
 
-            <div class="row" th:if="${sec:authorities}" >
+            <div class="row" >
                 <!-- Acordeon Productos -->
-                <div class="accordion mb-4" id="accordionProductos">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneProds" aria-expanded="true" aria-controls="collapseOneProds">
-                                Productos
-                            </button>
-                        </h2>
-                        <div id="collapseOneProds" class="accordion-collapse collapse" data-bs-parent="#accordionProductos">
-                            <div class="accordion-body row">
-                                <div class="col col-3 mb-4" th:each="producto: ${lista_productos}">
+                <div sec:authorize="hasAuthority('USER')">
+                    <div class="accordion mb-4" id="accordionProductos" >
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneProds" aria-expanded="true" aria-controls="collapseOneProds">
+                                    Productos
+                                </button>
+                            </h2>
+                            <div id="collapseOneProds" class="accordion-collapse collapse" data-bs-parent="#accordionProductos">
+                                <div class="accordion-body row">
+                                    <div class="col col-3 mb-4" th:each="producto: ${lista_productos}">
 
-                                    <div class="card" style="border-radius: 10px;">
-                                        <img src="https://www.dummyimage.com/500x500/000/fff&text=celular" alt="todos somos putos" style="border-top-left-radius: 10px 10px; border-top-right-radius: 10px 10px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title" th:text="${producto.nombre}"></h5>
-                                            <p class="card-text" th:text="${producto.descripcion}"></p>
+                                        <div class="card" style="border-radius: 10px;">
+                                            <img src="https://www.dummyimage.com/500x500/000/fff&text=celular" alt="todos somos putos" style="border-top-left-radius: 10px 10px; border-top-right-radius: 10px 10px;">
+                                            <div class="card-body">
+                                                <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                                                <p class="card-text" th:text="${producto.descripcion}"></p>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item" th:text="@{Pantalla:}+${producto.pantalla}"></li>
+                                                <li class="list-group-item" th:text="@{RAM:}+${producto.ram}"></li>
+                                                <li class="list-group-item" th:text="@{Procesador:}+${producto.procesador}"></li>
+                                                <li class="list-group-item" th:text="@{Camara:}+${producto.camara}"></li>
+                                            </ul>
+                                            <div class="card-body" style="display: flex; justify-content: center;">
+                                                <a th:href="@{/products/edit/}+${producto.id_producto}" class="card-link btn btn-primary col col-5 m-2">Editar</a>
+                                                <a th:href="@{/products/delete/}+${producto.id_producto}" onclick="return confirm('Esta seguro que desea eliminar el producto?')" class="card-link btn btn-danger col col-5 m-2">Eliminar</a>
+                                            </div>
                                         </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item" th:text="@{Pantalla:}+${producto.pantalla}"></li>
-                                            <li class="list-group-item" th:text="@{RAM:}+${producto.ram}"></li>
-                                            <li class="list-group-item" th:text="@{Procesador:}+${producto.procesador}"></li>
-                                            <li class="list-group-item" th:text="@{Camara:}+${producto.camara}"></li>
-                                        </ul>
-                                        <div class="card-body" style="display: flex; justify-content: center;">
-                                            <a th:href="@{/products/edit/}+${producto.id_producto}" class="card-link btn btn-primary col col-5 m-2">Editar</a>
-                                            <a th:href="@{/products/delete/}+${producto.id_producto}" onclick="confirm('Esta seguro que desea eliminar el producto?')" class="card-link btn btn-danger col col-5 m-2">Eliminar</a>
-                                        </div>
+                                        <!-- Agrega más productos aquí -->
                                     </div>
-                                    <!-- Agrega más productos aquí -->
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-                
+
                 <!-- Acordeon Marcas -->
-                <div class="accordion mb-4" id="accordionMarcas">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneMarcas" aria-expanded="true" aria-controls="collapseOneMarcas">
-                                Marcas
-                            </button>
-                        </h2>
-                        <div id="collapseOneMarcas" class="accordion-collapse collapse" data-bs-parent="#accordionMarcas">
-                            <div class="accordion-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="marca: ${lista_marcas}">
-                                            <th scope="row" th:text="${marca.id_marca}"></th>
-                                            <td th:text="${marca.nombre}"></td>
-                                            <td>
-                                                <div style="justify-content: center;">
-                                                    <a th:href="@{/brands/edit/}+${marca.id_marca}" class="btn btn-warning col-4">Editar</a>
-                                                    <a th:href="@{/brands/delete/}+${marca.id_marca}" onclick="confirm('Esta seguro que desea borrar esta marca?')" class="btn btn-danger col-4">Eliminar</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <div sec:authorize="hasAuthority('USER')">
+                    <div class="accordion mb-4" id="accordionMarcas">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneMarcas" aria-expanded="true" aria-controls="collapseOneMarcas">
+                                    Marcas
+                                </button>
+                            </h2>
+                            <div id="collapseOneMarcas" class="accordion-collapse collapse" data-bs-parent="#accordionMarcas">
+                                <div class="accordion-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="marca: ${lista_marcas}">
+                                                <th scope="row" th:text="${marca.id_marca}"></th>
+                                                <td th:text="${marca.nombre}"></td>
+                                                <td>
+                                                    <div style="justify-content: center;">
+                                                        <a th:href="@{/brands/edit/}+${marca.id_marca}" class="btn btn-warning col-4">Editar</a>
+                                                        <a th:href="@{/brands/delete/}+${marca.id_marca}" onclick="return confirm('Esta seguro que desea borrar esta marca?')" class="btn btn-danger col-4">Eliminar</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-                
+
                 <!-- Acordeon Usuarios -->
-                <div class="accordion mb-4" id="accordionUsuarios">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneUsuarios" aria-expanded="true" aria-controls="collapseOneUsuarios">
-                                Usuarios
-                            </button>
-                        </h2>
-                        <div id="collapseOneUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionUsuarios">
-                            <div class="accordion-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Empresa</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="usuario: ${lista_usuarios}">
-                                            <th scope="row" th:text="${usuario.id_usuario}"></th>
-                                            <td th:text="${usuario.nombre}"></td>
-                                            <td th:text="${usuario.email}"></td>
-                                            <td th:text="${usuario.id_empresa}"></td>
-                                            <td>
-                                                <div style="justify-content: center;">
-                                                    <a th:href="@{/user/edit/}+${usuario.id_usuario}" class="btn btn-warning col-4">Editar</a>
-                                                    <a th:href="@{/user/delete/}+${usuario.id_usuario}" onclick="confirm('¿Está seguro que desea eliminar este usuario?')" class="btn btn-danger col-4">Eliminar</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <div class="accordion mb-4" id="accordionUsuarios">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneUsuarios" aria-expanded="true" aria-controls="collapseOneUsuarios">
+                                    Usuarios
+                                </button>
+                            </h2>
+                            <div id="collapseOneUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionUsuarios">
+                                <div class="accordion-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Empresa</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="usuario: ${lista_usuarios}">
+                                                <th scope="row" th:text="${usuario.id_usuario}"></th>
+                                                <td th:text="${usuario.nombre}"></td>
+                                                <td th:text="${usuario.email}"></td>
+                                                <td th:text="${usuario.id_empresa}"></td>
+                                                <td>
+                                                    <div style="justify-content: center;">
+                                                        <a th:href="@{/user/edit/}+${usuario.id_usuario}" class="btn btn-warning col-4">Editar</a>
+                                                        <a th:href="@{/user/delete/}+${usuario.id_usuario}" onclick="return confirm('¿Está seguro que desea eliminar este usuario?')" class="btn btn-danger col-4">Eliminar</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-                
+
                 <!-- Acordeon Empresas -->
-                <div class="accordion mb-4" id="accordionEmresas">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneEmpresas" aria-expanded="true" aria-controls="collapseOneEmpresas">
-                                Empresas
-                            </button>
-                        </h2>
-                        <div id="collapseOneEmpresas" class="accordion-collapse collapse" data-bs-parent="#accordionEmresas">
-                            <div class="accordion-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Direccion</th>
-                                            <th scope="col">Telefono</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="empresa: ${lista_empresas}">
-                                            <th scope="row" th:text="${empresa.id_empresa}"></th>
-                                            <td th:text="${empresa.nombre}"></td>
-                                            <td th:text="${empresa.direccion}"></td>
-                                            <td th:text="${empresa.telefono}"></td>
-                                            <td>
-                                                <div style="justify-content: center;">
-                                                    <a th:href="@{/bussines/edit/}+${empresa.id_empresa}" class="btn btn-warning col-4">Editar</a>
-                                                    <a th:href="@{/bussines/delete/}+${empresa.id_empresa}" onclick="confirm('¿Está seguro que desea eliminar este usuario?')" class="btn btn-danger col-4">Eliminar</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <div class="accordion mb-4" id="accordionEmresas">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneEmpresas" aria-expanded="true" aria-controls="collapseOneEmpresas">
+                                    Empresas
+                                </button>
+                            </h2>
+                            <div id="collapseOneEmpresas" class="accordion-collapse collapse" data-bs-parent="#accordionEmresas">
+                                <div class="accordion-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Direccion</th>
+                                                <th scope="col">Telefono</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="empresa: ${lista_empresas}">
+                                                <th scope="row" th:text="${empresa.id_empresa}"></th>
+                                                <td th:text="${empresa.nombre}"></td>
+                                                <td th:text="${empresa.direccion}"></td>
+                                                <td th:text="${empresa.telefono}"></td>
+                                                <td>
+                                                    <div style="justify-content: center;">
+                                                        <a th:href="@{/bussines/edit/}+${empresa.id_empresa}" class="btn btn-warning col-4">Editar</a>
+                                                        <a th:href="@{/bussines/delete/}+${empresa.id_empresa}" onclick="return confirm('¿Está seguro que desea eliminar este usuario?')" class="btn btn-danger col-4">Eliminar</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
 
             </div>
